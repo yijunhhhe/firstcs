@@ -1,0 +1,51 @@
+USE yhe362assign2db;
+LOAD DATA LOCAL INFILE 'loaddatafall2018.txt' INTO TABLE products
+FIELDS TERMINATED BY ','
+ENCLOSED BY '"'
+LINES TERMINATED BY '\n';
+
+INSERT INTO products values("66","Elbow pads","14.25","120");
+INSERT INTO products values("35","Apple","18","99");
+
+insert into agents values("99","Hugh","Grant","Springfield","16");
+insert into agents values("22","Courtney","Cox","New York","25");
+INSERT INTO agents values("66","Rosie","ODonnell","Ottawa","100");
+INSERT INTO agents values("33","David","Letterman","Bedrock","100");
+INSERT INTO agents values("11","Regis","Philbin","Boston","33");
+INSERT INTO agents values("12","Rosie","Cox","Ottawa","50");
+INSERT INTO agents values("14","Yijun","He","London","40");
+
+Insert into customers values("21", "Homer", "Simpson", "Springfield","686-8956", "99");
+Insert into customers values("31", "Sideshow", "Bob", "Springfield", "686-8956", "66");
+Insert into customers values("12", "Monty", "Flintstone", "Bedrock", "789-0000", "99");
+Insert into customers values("15", "Fred", "Simpson", "Springfield", "777-2345", "11");
+Insert into customers values("13", "Super", "Man", "Kypto", "888-1234", "33");
+Insert into customers values("10", "Barney", "Rubble", "Bedrock", "777-1234", "11");
+Insert into customers values("14", "Peter", "Griffens", "Providence", "987-4567", "99");
+
+insert into purchase values("21", "99", "20");
+insert into purchase values("21", "12", "14");
+insert into purchase values("21", "66", "10");
+insert into purchase values("31", "99", "1");
+insert into purchase values("31", "12", "2");
+insert into purchase values("31", "78", "4");
+insert into purchase values("31", "66", "2");
+insert into purchase values("15", "66", "2");
+insert into purchase values("15", "78", "2");
+insert into purchase values("14", "66", "19");
+
+select * from customers;
+select * from agents;
+select * from purchase;
+select * from products;
+
+update customers set firstname = "Wonder",lastname = "Woman" where firstname = "Super" and lastname = "Man";
+
+update purchase set quantity = "5" where customerid in (select customerid from customers where firstname = "Sideshow");
+
+update customers set city = "Boston" where agentid in (select agentid from agents where firstname = "Regis");
+
+select * from customers;
+select * from agents;
+select * from purchase;
+select * from products;

@@ -1,0 +1,31 @@
+USE yhe362assign2db;
+-- Query 1
+select description from products;
+-- Query 2
+select distinct city from customers;
+-- Query 3
+select * from agents order by city;
+-- Query 4
+select firstname, lastname from customers where city = "Springfield";
+-- Query 5
+select lastname from customers where agentid in (select agentid from agents where firstname = "Regis");
+-- Query 6
+select description from products where description like "%pad%" or "%Pad%";
+-- Query 7
+select lastname, description, quantity from customers, purchase, products where customers.customerid = purchase.customerid and purchase.productid = products.productid;
+-- Query 8
+select quantity as "Homer's Total Purchases" from purchase where customerid in (select customerid from customers where firstname ="Homer");
+-- Query 9
+select firstname, lastname, sum(quantity) from customers, purchase where customers.customerid = purchase.customerid group by purchase.customerid;
+-- Query 10
+select description, numberofitems from products where products.productid not in (select productid from purchase);
+-- Query 11
+select products.description, products.numberofitems from products where products.productid not in (select purchase.productid from purchase, customers where customers.firstname ="Fred" and customers.lastname = "Flintstone");
+-- Query 12
+select agents.firstname, agents.lastname, customers.firstname, customers.lastname from agents, customers where agents.city = customers.city;
+-- Query 13
+select sum(purchase.quantity) as "total number of knee pads purchased" from purchase, products where products.description = "Knee Pads";
+-- Query 14
+select products.description from products where (select count(purchase.customerid) > 3 from purchase, customers where purchase.customerid = customers.customerid);
+-- Query 15
+select distinct agents.firstname, agents.lastname from agents, products, purchase, customers where products.description = "Knee Pads" and products.productid = purchase.productid and customers.agentid = agents.agentid;

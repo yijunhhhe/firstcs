@@ -1,0 +1,19 @@
+USE yhe362assign2db;
+
+select * from agents;
+select * from customers;
+select * from purchase;
+select * from products;
+
+create view cus as select customers.firstname, customers.lastname, products.description, purchase.quantity, products.costperitem, purchase.quantity * products.costperitem as "totalcost" from customers, purchase, products where customers.customerid = purchase.customerid;
+
+select * from cus;
+
+select * from cus where totalcost > 100;
+
+delete from products where description = "Apple";
+select * from products where description = "Apple";
+
+delete from agents where city = "Springfield";
+-- the row for agents is from Springfield which is not deleted yet
+-- so there is a foreign key constrain existing in the customers table

@@ -1,0 +1,68 @@
+Warning: Using a password on the command line interface can be insecure.
+--------------
+SHOW DATABASES
+--------------
+
+Database
+information_schema
+ yhe362assign2db
+mysql
+performance_schema
+yhe362assign2db
+--------------
+DROP database if exists yhe362assign2db
+--------------
+
+--------------
+CREATE database yhe362assign2db
+--------------
+
+--------------
+GRANT USAGE ON *.* TO 'ta'@'localhost'
+--------------
+
+--------------
+DROP USER 'ta'@'localhost'
+--------------
+
+--------------
+CREATE USER 'ta'@'localhost' IDENTIFIED BY 'cs3319'
+--------------
+
+--------------
+GRANT ALL PRIVILEGES ON yourwesternuseridassign2db.* TO 'ta'@'localhost'
+--------------
+
+--------------
+FLUSH PRIVILEGES
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+--------------
+CREATE TABLE products (productid VARCHAR(2), description VARCHAR(20), costperitem FLOAT, numberofitems INT, PRIMARY KEY (productid))
+--------------
+
+--------------
+CREATE TABLE agents (agentid VARCHAR(2), firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(30),  commissionpercentage INT,PRIMARY KEY(agentid))
+--------------
+
+--------------
+CREATE TABLE customers (customerid VARCHAR(2), firstname VARCHAR(30), lastname VARCHAR(30), city VARCHAR(30), phonenumber VARCHAR(12) , agentid VARCHAR(2), PRIMARY KEY(customerid), FOREIGN KEY(agentid) REFERENCES agents(agentid) )
+--------------
+
+--------------
+CREATE TABLE purchase (customerid varchar(2), productid varchar(2), quantity int, PRIMARY KEY(customerid,productid), FOREIGN KEY(customerid) REFERENCES customers(customerid), FOREIGN KEY(productid) REFERENCES products(productid))
+--------------
+
+--------------
+SHOW TABLES
+--------------
+
+Tables_in_yhe362assign2db
+agents
+customers
+products
+purchase
